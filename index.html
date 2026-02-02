@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Accept the Gift, Hadia! 😉</title>
+    <title>Accept the Gift Hadia! 😉</title>
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
     <style>
         body { 
@@ -22,17 +22,13 @@
             color: #ff4d6d; 
             font-size: 2.5rem; 
             margin-bottom: 50px;
-            padding: 0 20px;
             text-align: center;
         }
-        .btn-container { 
-            display: flex; 
-            gap: 20px; 
-            position: relative; 
-            width: 100%; 
-            justify-content: center;
+        .container {
+            display: flex;
+            gap: 20px;
             align-items: center;
-            height: 100px;
+            justify-content: center;
         }
         .btn { 
             padding: 15px 30px; 
@@ -42,16 +38,12 @@
             font-weight: 600; 
             cursor: pointer; 
             box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            transition: transform 0.2s;
+            transition: 0.1s; /* Fast movement */
+            min-width: 120px;
         }
-        #yesBtn { background: #45cf4a; color: white; z-index: 10; }
-        #noBtn { 
-            background: #ff4d6d; 
-            color: white; 
-            position: absolute; 
-            min-width: 150px;
-            white-space: nowrap;
-        }
+        #yesBtn { background: #45cf4a; color: white; }
+        #noBtn { background: #ff4d6d; color: white; position: relative; } /* Shuru mein Relative */
+        
         #final-screen {
             position: fixed; inset: 0; background: white; 
             display: none; flex-direction: column; align-items: center; 
@@ -64,9 +56,9 @@
 
     <h1>Hadia, kya tum mera gift accept karogi? 🙃</h1>
 
-    <div class="btn-container">
+    <div class="container">
         <button id="yesBtn" class="btn" onclick="done()">Yes! 😍</button>
-        <button id="noBtn" class="btn" onmouseover="moveMe()" onclick="moveMe()">No! 😠</button>
+        <button id="noBtn" class="btn" onclick="moveMe()">No! 😠</button>
     </div>
 
     <div id="final-screen">
@@ -77,23 +69,29 @@
     <script>
         const noBtn = document.getElementById('noBtn');
         const msgs = [
-            "Nice try! 😉", "Maan jao naaa!", "Itna nakhra?", "Nahi milega rasta!",
+            "Nice try! 😉", "Maan jao naaa!", "Uff itna nakhra?", "Nahi milega rasta!",
             "Try again! 😂", "Ziddi ladki!", "Soch lo phir...", "Aise kaise No?",
-            "Uff ye nakhre!", "Bhagte raho!", "Wrong choice!", "Yes wala daba do!",
-            "Pakad ke dikhao!", "Hadh hai wese!", "Mana kar rahi ho?", "Chalo dubara try karo!",
-            "Still No? 🤨", "Mana loon ga!", "Himat mat haro!", "Just click YES!"
+            "Bhagte raho!", "Wrong choice!", "Yes wala daba do!", "Pakad ke dikhao!",
+            "Hadh hai wese!", "Mana kar rahi ho?", "Still No? 🤨", "Mana loon ga!",
+            "Himat mat haro!", "Zid choro na!", "Just say YES!", "Dekho phir se No!"
         ];
 
         function moveMe() {
-            // Randomly select a message from the list
+            // Button ko absolute kar do taake wo screen par bhag sake
+            noBtn.style.position = 'absolute';
+            
+            // Random message change karo
             const randomMsg = msgs[Math.floor(Math.random() * msgs.length)];
             noBtn.innerText = randomMsg;
 
-            // Get screen dimensions minus button size
-            const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
-            const y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
+            // Screen ki width aur height nikalna
+            const maxX = window.innerWidth - noBtn.offsetWidth;
+            const maxY = window.innerHeight - noBtn.offsetHeight;
 
-            // Set new position
+            // Nayi random position
+            const x = Math.floor(Math.random() * maxX);
+            const y = Math.floor(Math.random() * maxY);
+
             noBtn.style.left = x + 'px';
             noBtn.style.top = y + 'px';
         }
