@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accept the Gift, Hadia! 😉</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        body { 
+            margin: 0; 
+            font-family: 'Poppins', sans-serif; 
+            background: #fff5f8; 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            justify-content: center; 
+            height: 100vh; 
+            overflow: hidden;
+        }
+        h1 { 
+            font-family: 'Dancing Script', cursive; 
+            color: #ff4d6d; 
+            font-size: 2.5rem; 
+            margin-bottom: 50px;
+            padding: 0 20px;
+            text-align: center;
+        }
+        .btn-container { 
+            display: flex; 
+            gap: 20px; 
+            position: relative; 
+            width: 100%; 
+            justify-content: center;
+            align-items: center;
+            height: 100px;
+        }
+        .btn { 
+            padding: 15px 30px; 
+            border: none; 
+            border-radius: 50px; 
+            font-size: 1.1rem; 
+            font-weight: 600; 
+            cursor: pointer; 
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: transform 0.2s;
+        }
+        #yesBtn { background: #45cf4a; color: white; z-index: 10; }
+        #noBtn { 
+            background: #ff4d6d; 
+            color: white; 
+            position: absolute; 
+            min-width: 150px;
+            white-space: nowrap;
+        }
+        #final-screen {
+            position: fixed; inset: 0; background: white; 
+            display: none; flex-direction: column; align-items: center; 
+            justify-content: center; z-index: 1000;
+        }
+        #final-screen h2 { font-family: 'Dancing Script', cursive; font-size: 3rem; color: #ff4d6d; }
+    </style>
+</head>
+<body>
+
+    <h1>Hadia, kya tum mera gift accept karogi? 🙃</h1>
+
+    <div class="btn-container">
+        <button id="yesBtn" class="btn" onclick="done()">Yes! 😍</button>
+        <button id="noBtn" class="btn" onmouseover="moveMe()" onclick="moveMe()">No! 😠</button>
+    </div>
+
+    <div id="final-screen">
+        <h2>Thanks Hadia! ❤️</h2>
+        <p style="font-size: 1.2rem;">Mujhe pata tha tum maan jaogi! 🥰</p>
+    </div>
+
+    <script>
+        const noBtn = document.getElementById('noBtn');
+        const msgs = [
+            "Nice try! 😉", "Maan jao naaa!", "Itna nakhra?", "Nahi milega rasta!",
+            "Try again! 😂", "Ziddi ladki!", "Soch lo phir...", "Aise kaise No?",
+            "Uff ye nakhre!", "Bhagte raho!", "Wrong choice!", "Yes wala daba do!",
+            "Pakad ke dikhao!", "Hadh hai wese!", "Mana kar rahi ho?", "Chalo dubara try karo!",
+            "Still No? 🤨", "Mana loon ga!", "Himat mat haro!", "Just click YES!"
+        ];
+
+        function moveMe() {
+            // Randomly select a message from the list
+            const randomMsg = msgs[Math.floor(Math.random() * msgs.length)];
+            noBtn.innerText = randomMsg;
+
+            // Get screen dimensions minus button size
+            const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
+            const y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
+
+            // Set new position
+            noBtn.style.left = x + 'px';
+            noBtn.style.top = y + 'px';
+        }
+
+        function done() {
+            document.getElementById('final-screen').style.display = 'flex';
+        }
+    </script>
+</body>
+</html>
